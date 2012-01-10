@@ -1,3 +1,3 @@
 
-require 'metrics/persistence/direct'
-require 'metrics/persistence/test'
+require 'librato/metrics/persistence/direct'
+require 'librato/metrics/persistence/test'

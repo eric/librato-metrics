@@ -75,6 +75,33 @@ module Librato
         end
       end
 
+      describe '#gauge' do
+        before(:all) do
+          Simple.persistence = :test
+          Simple.authenticate 'me@librato.com', 'foo'
+        end
+        after(:all) { Simple.flush_authentication }
+
+        it "should persist metrics immediately" do
+          Simple.persistence = :test
+          Simple.gauge(:foo, 123).should eql true
+          Simple.persister.persisted.should eql({:gauges => [{:name => 'foo', :value => 123}]})
+        end
+      end
+
+      describe '#counter' do
+        before(:all) do
+          Simple.persistence = :test
+          Simple.authenticate 'me@librato.com', 'foo'
+        end
+        after(:all) { Simple.flush_authentication }
+
+        it "should persist metrics immediately" do
+          Simple.persistence = :test
+          Simple.counter(:foo, 123).should eql true
+          Simple.persister.persisted.should eql({:counters => [{:name => 'foo', :value => 123}]})
+        end
+      end
     end
 
   end

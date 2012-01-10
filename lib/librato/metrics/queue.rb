@@ -105,6 +105,26 @@ module Librato
       end
       alias :benchmark :time
 
+      # Add a gauge entry to the metric set:
+      #
+      # @param String name Gauge name
+      # @param Numeric value Gauge value
+      # @param Hash options Optional options
+      # @return Hash queued_metrics the currently queued metrics
+      def gauge(name, value, options = {})
+        add(name, options.merge(:type => 'gauge', :value => value))
+      end
+
+      # Add a counter entry to the metric set:
+      #
+      # @param String name Counter name
+      # @param Numeric value Counter value
+      # @param Hash options Optional options
+      # @return Hash queued_metrics the currently queued metrics
+      def counter(name, value, options = {})
+        add(name, options.merge(:type => 'counter', :value => value))
+      end
+
     private
 
       def create_persister

@@ -1,15 +1,12 @@
-$:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
-
 require 'base64'
 require 'excon'
 require 'json'
 
-require 'metrics/errors'
-require 'metrics/persistence'
-require 'metrics/queue'
-require 'metrics/simple'
-require 'metrics/version'
+require 'librato/metrics/errors'
+require 'librato/metrics/persistence'
+require 'librato/metrics/queue'
+require 'librato/metrics/simple'
+require 'librato/metrics/version'
 
 module Librato
 

@@ -83,6 +83,24 @@ module Librato
           @queue.submit
         end
 
+        # Add a gauge entry to the metric set:
+        #
+        # @param String name Gauge name
+        # @param Numeric value Gauge value
+        # @param Hash options Optional options
+        def gauge(name, value, options = {})
+          submit(name => options.merge(:type => 'gauge', :value => value))
+        end
+
+        # Add a counter entry to the metric set:
+        #
+        # @param String name Counter name
+        # @param Numeric value Counter value
+        # @param Hash options Optional options
+        def counter(name, value, options = {})
+          submit(name => options.merge(:type => 'counter', :value => value))
+        end
+
         def user_agent
           ruby_ver = "#{ruby_engine}; #{RUBY_VERSION}p#{RUBY_PATCHLEVEL}; #{RUBY_PLATFORM}"
           "librato-metrics/#{Metrics::VERSION} (#{ruby_ver}) direct-excon/#{Excon::VERSION}"
